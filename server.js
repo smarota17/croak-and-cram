@@ -19,3 +19,7 @@ app.get('/', (req,res) =>{
 app.get('/tasklist', (req,res) =>{
     res.sendFile(directory + 'tasklist.html');
 })
+
+app.get('/signup', (req,res) =>{
+    res.sendFile(directory + 'signUp.html');
+})
