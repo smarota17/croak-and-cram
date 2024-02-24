@@ -15,3 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (req,res) =>{
     res.sendFile(directory + 'index.html');
 })
+
+app.get('/tasklist', (req,res) =>{
+    res.sendFile(directory + 'tasklist.html');
+})
