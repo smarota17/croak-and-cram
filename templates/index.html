@@ -19,7 +19,12 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 		:root {
-			background-color: #91BA8D;
+			--bg-image: url("./background.png");
+		}
+		body {
+			background-image: var(--bg-image);
+			background-size: 1250px 550px;	
+
 		}
 		.flex-container {
 			display: flex;
