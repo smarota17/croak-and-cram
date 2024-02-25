@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Study Plan - Croak&Cram</title>
+    <title>Study Plan - Croak & Cram</title>
   </head>
 
   <body>
@@ -326,36 +326,55 @@
 
 		//end of getting user input
 			let responseCounter = 0;
+			let subject = "";
+			let assignment = "";
+			let duedays = "";
 
 			document.getElementById("user-input").addEventListener("keypress", function(event) {
 					if (event.keyCode === 13) { // Check if Enter key is pressed
 							var userInput = this.value;
 							addMessage("user", userInput); // add to ui
-							this.value = ""; // clear
 							
 							responseCounter++;
 							var lilypadResponse = "";
+							let generateAI = false;
 
 							// need to ask what is hw 
 							if (responseCounter == 1) {
+								subject = userInput;
 								lilypadResponse = "What is your assignment? Choose from: test, essay, project, homework";
 							}
 							// need to ask when due
 							else if (responseCounter == 2) {
+								assignment = userInput;
 								lilypadResponse = "When is your assignment due (in number of days)?";
 							}
 							// need to generate ai report
 							else if (responseCounter == 3) {
+								duedays = userInput;
 								lilypadResponse = "Thank you for the information, I will start generating your study plan. Please do not enter input until I am done.";
+								generateAI = true;
+
 								responseCounter == 0;
+								subject = "";
+								assignment = "";
+								duedays = "";
 							}
 							// response is 0
 							else {
 								lilypadResponse = "To customize your study plan, please provide the <b>subject</b> of the assignment you are studying for";
 							}
+
 							setTimeout(function() {
 									addMessage("lilypad", lilypadResponse); // Add lilypad response to UI
 							}, 500); // Simulate a delay for lilypad response
+
+							if (generateAI == true) {
+								generateStudyPlan(subject, assignment, duedays);
+							}
+
+							this.value = ""; // clear
+
 					}
 			});
 
@@ -408,6 +427,10 @@
 						chatBody.appendChild(divContainer);
 					}
 			}
+			function generateStudyPlan(sVal, aVal, dVal) {
+
+			}
+
 	</script>
 
 </html>
