@@ -305,6 +305,9 @@
 			}
 		}
 	</style>
+
+	<script src="../server.js"></script>
+
 	<script>
 		let studyStyle = "";
 		//beginning of getting user input
@@ -428,10 +431,38 @@
 						chatBody.appendChild(divContainer);
 					}
 			}
-			function generateStudyPlan(sVal, aVal, dVal, stVal) {
 
+			async function generateStudyPlan(sVal, aVal, dVal, stVal) {
+					var prompt = "Generate a study guide for a " + sVal + " " + aVal + " that is due in " + dVal + " days for a " + stVal + " learner.";
+					// Prepare request data
+					const requestData = {
+							model: "gpt-3.5-turbo", // Choose the model you want to use
+							messages: [{"role": "user", "content": prompt}],
+							max_tokens: 150, // Adjust the max_tokens parameter as needed
+					};
+
+					try {
+							// Send request to the API
+							const response = await fetch("https://api.openai.com/v1/chat/completions", {
+									method: "POST",
+									headers: {
+											"Content-Type": "application/json",
+											"Authorization": "Bearer " // Replace with your actual API key
+									},
+									body: JSON.stringify(requestData)
+							});
+
+							if (!response.ok) {
+									throw new Error("Failed to get response from the API");
+							}
+
+							// Parse and display the response
+							const responseData = await response.json();
+							const lilypadResponse = responseData.choices[0].message.content;
+							addMessage("lilypad", lilypadResponse); // Add lilypad response to UI
+					} catch (error) {
+							console.error("Error:", error);
+					}
 			}
-
 	</script>
-
 </html>

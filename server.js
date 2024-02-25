@@ -1,9 +1,17 @@
+require("dotenv").config();
+module.exports = {
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY
+};
+
 const express = require('express');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const fs = require('fs');
 
 const app = express();
+app.use(express.json());
+
+const { Configuration, OpenAIApi } = require("openai");
 
 const PORT =3000;
 const directory = __dirname + "/templates/";
@@ -126,3 +134,4 @@ function makeObject(req){
     fs.writeFileSync("users.json", jsonusers, "utf-8");
 
 }
+
