@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Croak & Cram</title>
+		<link rel="icon" type="image/png" href="./cc_logo.png">
 	</head>
 	<body>
 		<div class="flex-container">
@@ -41,12 +42,16 @@
 		}
 		.task-item {
 			font-size: 2rem;
+			margin: 0.2rem;
 		}
 		#write-task-box {
 			padding: 0.5rem;
 			font-family: "Neucha", cursive;
 			font-size: 2rem;
 			width: 80%;
+			border-radius: 20px;
+			border: none;
+			margin: 0.2rem;
 		}
 	</style>
 	<script>
@@ -87,20 +92,30 @@
 			let taskDiv = document.createElement('div');
 			taskDiv.className = "task-item";
 			taskDiv.id = "task" + counter;
-			let taskContent = document.createTextNode(taskDescription);
+			taskDiv.style.width = '80%';
 			let checkbox = document.createElement('input');
 			checkbox.type = "checkbox";
-			checkbox.addEventListener("click", remove_task);
+			checkbox.addEventListener("click", check_task);
 			checkbox.id = "checkbox" + counter;
 			taskDiv.appendChild(checkbox);
+
+			let taskContent = document.createTextNode(taskDescription);
 			taskDiv.appendChild(taskContent);
+
+			let trashIcon = document.createElement('img');
+			trashIcon.id = "trash" + counter;
+			trashIcon.src = './delete_google_material_ui.png';
+			trashIcon.alt = 'Delete Task';
+			trashIcon.style.float = 'right';
+			trashIcon.addEventListener("click", remove_task);
+			taskDiv.appendChild(trashIcon);
 
 			let tasks = document.getElementById('tasks');
 			tasks.append(taskDiv);
 			counter++;
 		}
 
-		function remove_task(event) {
+		function check_task(event) {
 			let checkboxId = event.srcElement.id;
 			let idNumber = checkboxId.replace("checkbox", "");
 			let taskId = "task" + idNumber;
@@ -114,8 +129,17 @@
 			}
 			else {
 				taskDiv.style.textDecoration = 'none';
-				allTasksList[idNumber].checked = true;
+				allTasksList[idNumber].checked = false;
 			}
+			localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
+		}
+
+		function remove_task(event) {
+			let trashId = event.srcElement.id;
+			let idNumber = trashId.replace("trash", "");
+			let taskDiv = document.getElementById("task" + idNumber);
+			taskDiv.remove();
+			allTasksList.splice(idNumber, 1);
 			localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
 		}
 	</script>
