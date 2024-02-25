@@ -1,14 +1,20 @@
+require("dotenv").config();
+module.exports = {
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY
+};
+
 const express = require('express');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const fs = require('fs');
 
 const app = express();
+app.use(express.json());
+
+const { Configuration, OpenAIApi } = require("openai");
 
 const PORT =3000;
 const directory = __dirname + "/templates/";
-
-
 
 app.listen(PORT, () => console.log (`listening on port: ${PORT}`));
 
@@ -23,9 +29,31 @@ app.get('/tasklist', (req,res) =>{
     res.sendFile(directory + 'tasklist.html');
 })
 
+app.get('/users', (req,res) =>{
+    fs.readFile('users.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error reading data file');
+            return;
+        }
+
+        const jsonData = JSON.parse(data);
+        res.json(jsonData);
+    });
+})
+
+
+app.get('/studyplan', (req,res) =>{
+    res.sendFile(directory + 'studyplan.html');
+})
+
 app.get('/signup', (req,res) =>{
     res.sendFile(directory + 'signUp.html');
 })
+app.get('/viewProfile', (req,res) =>{
+    res.sendFile(directory + 'viewProfile.html');
+})
+
 
 app.post('/signUp', upload.single('avatar'),(req,res) =>{
     console.log(req.body);
@@ -88,11 +116,11 @@ function makeObject(req){
     
     let max = Math.max(visual, auditory, readWrite);
     if(max === visual){
-        style = 'visual';
+        style = 'Visual';
     } else if( max === auditory){
-        style = 'auditory';
+        style = 'Auditory';
     } else {
-        style = 'readWrite'
+        style = 'Read and Write'
     }
     var obj = {
         firstName: `${req.body.firstName}`,
