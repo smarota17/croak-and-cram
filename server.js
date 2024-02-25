@@ -8,8 +8,6 @@ const app = express();
 const PORT =3000;
 const directory = __dirname + "/templates/";
 
-
-
 app.listen(PORT, () => console.log (`listening on port: ${PORT}`));
 
 app.use(express.static('static'));
