@@ -7,10 +7,16 @@
 	<body>
 		<div class="flex-container">
 			<div class="left">
-				<img class="logo" src="./cc_logo.png" alt="" />
+				<a href="/">
+					<img class="logo" src="./cc_logo.png" alt="" />
+				</a>
 			</div>
 			<div class="right">
-				<h1>Tasks: Write To-Dos</h1>
+				<a href="/">
+					<img src="./home_google_material_ui.png" alt="Home" style="float: center; margin-right: 20%" />
+				</a>
+
+				<h1 style="display: inline;">Tasks: Write To-Dos</h1>
 				<div id="tasks"></div>
 				<input id="write-task-box" type="text" onkeydown="onTextboxEdit(this)">
 			</div>
@@ -20,8 +26,14 @@
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
 		:root {
-			background-color: #91BA8D;
+			--bg-image: url("./background.png");
 			font-family: "Neucha", cursive;
+		}
+		body {
+			background-image: var(--bg-image);
+			background-position: center center;
+			background-repeat: no-repeat;	
+			background-size: cover;
 		}
 		.flex-container {
 			display: flex;
@@ -31,14 +43,17 @@
 			align-items: center;
 		}
 		.left {
-			flex: 10%;
+			flex: 20%;
 			margin: 2rem;
+			margin-left: 200px;
+			max-width: 35%;
 		}
 		.right {
-			flex: 30%;
+			flex: 10%;
+			align-items: left;
 		}
 		.logo {
-			max-width: 100%;
+			width: 100%;
 		}
 		.task-item {
 			font-size: 2rem;
