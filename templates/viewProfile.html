@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+
+    <h1>Welcome <span id="firstName"></span> <span id="lastName"></span> !</h1> <br />
+    <!-- hardcode image -->
+    <div id="profile"></div>
+
+    <h2>User Data</h2> 
+    
+    <p>Username: <span id="username"></span></p>
+    <label id="pass-label">
+        <p>Password: <span id="password"></span></p>
+        <button>Change Password</button>
+    </label>
+    
+    <p>Study Style: <span id="studyStyle"></span></p>
+
+    <div id="dataContainer"></div>
+    <script>
+        
+        fetch('/users')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('dataContainer');
+                const first = document.getElementById('firstName');
+                const last = document.getElementById('lastName');
+                const username = document.getElementById('username');
+                const password = document.getElementById('password');
+                const studySyle = document.getElementById('studyStyle');
+                let jsontemp = data;
+                let users = [];
+                for(var i in jsontemp){
+                    users.push(jsontemp[i]);
+                }
+                let user = users[users.length-1];
+                console.log(user.firstName);
+                //container.textContent = JSON.stringify(data, null, 2);
+                //container.textContent = JSON.stringify(user);
+                first.innerHTML = user.firstName;
+                last.innerHTML = user.lastName;
+                username.innerHTML = user.username;
+                let length = user.password.length;
+                let encodedPass = ''
+                for(var i = 0; i < length; i++){
+                    encodedPass += '*'
+                }
+                password.innerHTML = encodedPass;
+
+                studySyle.innerHTML = user.studyStyle;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+
+</body>
+<style>
+     @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+    body{
+        background-color: #91BA8D;
+        font-family: "Neucha", cursive;
+        padding-left: 10% ;
+    }
+    h1{
+        margin-left: -8%;
+        font-size: 54px;
+    }
+    h2{
+        font-size: 48px;
+        margin-top: -2%;
+    }
+    p{
+        font-size: 36px;
+    }
+
+    #pass-label{
+        display: flex;
+        margin-top: -50px;
+        margin-bottom: -50px;
+        
+    }
+    button{
+        margin-left: 20px;
+        height: 50px;
+        margin-top: 30px;
+    }
+    #profile{
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border-radius: 100px;
+        margin-bottom: 50px;
+    }
+
+</style>
+</html>
