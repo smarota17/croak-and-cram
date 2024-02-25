@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Croak & Cram</title>
+		<link rel="icon" type="image/png" href="./cc_logo.png">
+	</head>
+	<body>
+		<div class="flex-container">
+			<div class="left">
+				<a href="/">
+					<img class="logo" src="./cc_logo.png" alt="" />
+				</a>
+			</div>
+			<div class="right">
+				<a href="/">
+					<img src="./home_google_material_ui.png" alt="Home" style="float: center; margin-right: 20%" />
+				</a>
+
+				<h1 style="display: inline;">Tasks: Write To-Dos</h1>
+				<div id="tasks"></div>
+				<input id="write-task-box" type="text" onkeydown="onTextboxEdit(this)">
+			</div>
+		</div>
+	</body>
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+		:root {
+			--bg-image: url("./background.png");
+			font-family: "Neucha", cursive;
+		}
+		body {
+			background-image: var(--bg-image);
+			background-position: center center;
+			background-repeat: no-repeat;	
+			background-size: cover;
+		}
+		.flex-container {
+			display: flex;
+			flex-flow: row wrap;
+			width: 100%;
+			justify-content: space-evenly;
+			align-items: center;
+		}
+		.left {
+			flex: 20%;
+			margin: 2rem;
+			margin-left: 200px;
+			max-width: 35%;
+		}
+		.right {
+			flex: 10%;
+			align-items: left;
+		}
+		.logo {
+			width: 100%;
+		}
+		.task-item {
+			font-size: 1.4rem;
+			margin: 0.2rem;
+		}
+		#write-task-box {
+			padding: 0.5rem;
+			font-family: "Neucha", cursive;
+			font-size: 1.4rem;
+			width: 80%;
+			border-radius: 20px;
+			border: none;
+			margin: 0.2rem;
+		}
+	</style>
+	<script>
+		let counter = 0;
+		let allTasksList = [];
+
+		if (localStorage.hasOwnProperty('allTasksList')) {
+			let savedTasksList = JSON.parse(localStorage.getItem('allTasksList'));
+			for (let i = 0; i < savedTasksList.length; i++) {
+				let task = savedTasksList[i];
+				add_task(task['task']);
+				let taskDiv = document.getElementById("task" + i);
+				if (task['checked']) {
+					taskDiv.style.textDecoration = 'line-through';
+					document.getElementById("checkbox" + i).checked = true;
+				}
+				else {
+					taskDiv.style.textDecoration = 'none';
+				}
+				allTasksList.push(task);
+				localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
+			}
+		}
+
+		function onTextboxEdit(content) {
+			if (event.key === 'Enter') {
+				add_task(content.value);
+
+				allTasksList.push({'task': content.value, 'checked': false});
+				localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
+
+				let taskTextbox = document.getElementById('write-task-box');
+				taskTextbox.value = "";
+			}
+		}
+
+		function add_task(taskDescription) {
+			let taskDiv = document.createElement('div');
+			taskDiv.className = "task-item";
+			taskDiv.id = "task" + counter;
+			taskDiv.style.width = '80%';
+			let checkbox = document.createElement('input');
+			checkbox.type = "checkbox";
+			checkbox.addEventListener("click", check_task);
+			checkbox.id = "checkbox" + counter;
+			taskDiv.appendChild(checkbox);
+
+			let taskContent = document.createTextNode(taskDescription);
+			taskDiv.appendChild(taskContent);
+
+			let trashIcon = document.createElement('img');
+			trashIcon.id = "trash" + counter;
+			trashIcon.src = './delete_google_material_ui.png';
+			trashIcon.alt = 'Delete Task';
+			trashIcon.style.float = 'right';
+			trashIcon.addEventListener("click", remove_task);
+			taskDiv.appendChild(trashIcon);
+
+			let tasks = document.getElementById('tasks');
+			tasks.append(taskDiv);
+			counter++;
+		}
+
+		function check_task(event) {
+			let checkboxId = event.srcElement.id;
+			let idNumber = checkboxId.replace("checkbox", "");
+			let taskId = "task" + idNumber;
+			let taskDiv = document.getElementById(taskId);
+
+			let checkbox = document.getElementById(checkboxId);
+
+			if (checkbox.checked) {
+				taskDiv.style.textDecoration = 'line-through';
+				allTasksList[idNumber].checked = true;
+			}
+			else {
+				taskDiv.style.textDecoration = 'none';
+				allTasksList[idNumber].checked = false;
+			}
+			localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
+		}
+
+		function remove_task(event) {
+			let trashId = event.srcElement.id;
+			let idNumber = trashId.replace("trash", "");
+			let taskDiv = document.getElementById("task" + idNumber);
+			taskDiv.remove();
+			allTasksList.splice(idNumber, 1);
+			localStorage.setItem("allTasksList", JSON.stringify(allTasksList));
+		}
+	</script>
+</html>

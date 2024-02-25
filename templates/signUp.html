@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form</title>
+  </head>
+  <body>
+    <form id="signupForm" method="POST" action="/signUp" enctype="multipart/form-data">
+        <h1>Sign Up</h1>
+        <h2>Upload an avatar</h2>
+        <h4>Preview Image Before Upload</h4>
+        <div class="preview-image">
+            <img id="previewImage" alt="Preview" style="max-width: 200px; max-height: 200px;"> 
+        </div>
+        <input type="file" name="avatar" accept="image/*" id="imageInput" required>
+        <br>
+        
+        <br />
+        <script>
+            const imageInput = document.getElementById('imageInput');
+            const previewImage = document.getElementById('previewImage');
+            function previewSelectedImage() {
+                const file = imageInput.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    }
+                }
+            }
+            imageInput.addEventListener('change', previewSelectedImage);
+        </script>
+        <label>
+            First Name <br />
+            <input type="text" name="firstName" id="firstName"  maxlength="20" required/>
+        </label><br />
+        <label>
+            Last Name <br />
+            <input type="text" name="lastName" id="lastName"  maxlength="20" required/>
+        </label><br />
+        <label>
+            Username <br />
+            <input type="text" name="username" id="userame" maxlength="20" required/>
+        </label><br />
+        <label>
+            Password <br />
+            <input type="password" name="password" id="password" maxlength="20" required/>
+        </label><br /><br />
+        <h2>Study Style Quiz</h2>
+        <label>
+            <!-- learning types visual, auditory, read/wite -->
+            Question 1: I pay most attention in class when profesors: <br />
+            <input type="radio" name="question1" id="q1o1" value="Visual" required/>
+            <label for="q1o1">Show pictures or graphs on the board<label><br />
+            <input type="radio" name="question1" id="q1o2" value="Auditory"/>
+            <label for="q1o2">Have a classroom discussion<label><br />
+            <input type="radio" name="question1" id="q1o3" value="readWrite"/>
+            <label for="q1o2">Give me written instructions or notes to follow<label><br />
+        </label><br />
+        <label>
+            <!-- learning types visual, auditory, read/wite -->
+            Question 2: I remember the most information when: <br />
+            <input type="radio" name="question2" id="q2o1" value="Visual" required/>
+            <label for="q2o1">I see it in a video<label><br />
+            <input type="radio" name="question2" id="q2o2" value="Auditory"/>
+            <label for="q2o2">I hear a song or make a rhyme out of it<label><br />
+            <input type="radio" name="question2" id="q2o3" value="readWrite"/>
+            <label for="q2o3">I write it down<label><br />
+           
+        </label><br />
+        <label>
+            <!-- learning types visual, auditory, read/wite -->
+            Question 3: When I work in a group, I am most likely to: <br />
+            <input type="radio" name="question3" id="q3o1" value="Visual" required/>
+            <label for="q3o1">Draw the pictures and graphs<label><br />
+            <input type="radio" name="question3" id="q3o2" value="Auditory"/>
+            <label for="q3o2">Do all the talking<label><br />
+            <input type="radio" name="question3" id="q3o3" value="readWrite"/>
+            <label for="q3o3">Take the notes<label><br />
+          
+           
+        </label><br />
+
+        <label>
+            <!-- learning types visual, auditory, read/wite -->
+            Question 4: When I am learning math, I prefer to: <br />
+            <input type="radio" name="question4" id="q4o1"  value="Visual" required/>
+            <label for="q4o1">See graphs or illustrations of the concepts<label><br />
+            <input type="radio" name="question4" id="q4o2" value="Auditory"/>
+            <label for="q4o2">Have a friend quiz me<label><br />
+            <input type="radio" name="question4" id="q4o3" value="readWrite"/>
+            <label for="q4o3">Write out the rules in my notebook<label><br />
+        </label><br />
+
+        <label>
+            <!-- learning types visual, auditory, read/wite -->
+            Question 5: Whats the best way for you to learn how something works? <br />
+            <input type="radio" name="question5" id="q5o1" value="Visual" required/>
+            <label for="q5o1">Have someone show me<label><br />
+            <input type="radio" name="question5" id="q5o2" value="Auditory"/>
+            <label for="q5o2">Listen to someone explain it to me<label><br />
+            <input type="radio" name="question5" id="q5o3" value="readWrite"/>
+            <label for="q5o3">Read directions or documentation<label><br />
+
+        </label><br />
+        <input type="submit" value="Sign Up!" id="submitForm"/>
+
+    </form>
+  </body>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+    body{
+        background-color: #91BA8D;
+        font-family: "Neucha", cursive;
+        display: flex;
+        font-size: 18px;
+    }
+    #signupForm{
+        width: 50%;
+        margin:auto;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        box-sizing: border-box;
+    }
+    h1{
+        font-size: 64px;
+        color:white;
+        margin-left: -5%;
+        margin-bottom: -1%;
+    }
+    h2{
+        font-size: 30px;
+        color:#27362b;
+    }
+    .preview-image{
+        background-color: white;
+        width: 200px;
+        height: 200px;
+    }
+    #submitForm{
+        background-color: #27362b;
+        color:white;
+        width: 150px;
+        height: 40px;
+        font-size: large;
+        border-radius: 10px;
+    }
+    input[type="text"], input[type="password"]{
+        width: 200px;
+    }
+    
+  </style>
+</html>
