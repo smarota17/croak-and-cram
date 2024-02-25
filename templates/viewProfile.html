@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    <div class="main">
     <h1>Welcome <span id="firstName"></span> <span id="lastName"></span> !</h1> <br />
     <!-- hardcode image -->
     <div id="profile"></div>
@@ -22,8 +22,7 @@
     </label>
     
     <p>Study Style: <span id="studyStyle"></span></p>
-
-    <div id="dataContainer"></div>
+    </div>
     <script>
         
         fetch('/users')
@@ -66,6 +65,10 @@
         background-color: #91BA8D;
         font-family: "Neucha", cursive;
         padding-left: 10% ;
+    }
+    .main{
+        width:50%;
+        margin:auto;
     }
     h1{
         margin-left: -8%;
