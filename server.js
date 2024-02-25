@@ -23,6 +23,10 @@ app.get('/tasklist', (req,res) =>{
     res.sendFile(directory + 'tasklist.html');
 })
 
+app.get('/studyplan', (req,res) =>{
+    res.sendFile(directory + 'studyplan.html');
+})
+
 app.get('/signup', (req,res) =>{
     res.sendFile(directory + 'signUp.html');
 })
