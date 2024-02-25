@@ -433,7 +433,7 @@
 					const requestData = {
 							model: "gpt-3.5-turbo", // Choose the model you want to use
 							messages: [{"role": "user", "content": prompt}],
-							max_tokens: 150, // Adjust the max_tokens parameter as needed
+							max_tokens: 250, // Adjust the max_tokens parameter as needed
 					};
 
 					try {
@@ -442,7 +442,7 @@
 									method: "POST",
 									headers: {
 											"Content-Type": "application/json",
-											"Authorization": "Bearer" // Replace with your actual API key
+											"Authorization": "Bearer " // Replace with your actual API key
 									},
 									body: JSON.stringify(requestData)
 							});
