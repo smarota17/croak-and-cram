@@ -34,7 +34,7 @@
                 <div id="received-msg" class="received-msg">
                   <div class="received-msg-inbox">
                     <p>
-                      Hi XXX!! My name is Lilypad, your <b>personal study buddy</b>. I'm here to help you succeed
+                      Hi <span id="firstName"></span>!! My name is Lilypad, your <b>personal study buddy</b>. I'm here to help you succeed
 											by generating a personalized study plan tailored to your preferred study style.
                     </p>
 										<p>
@@ -306,6 +306,25 @@
 		}
 	</style>
 	<script>
+		//beginning of getting user input
+		fetch('/users')
+		.then(response => response.json())
+		.then(data => {
+			const first = document.getElementById('firstName');
+			const studySyle = document.getElementById('studyStyle');
+			let jsontemp = data;
+			let users = [];
+			for(var i in jsontemp){
+				users.push(jsontemp[i]);
+			}
+			let user = users[users.length-1];
+			
+			first.innerHTML = user.firstName;
+			studySyle.innerHTML = user.studyStyle;
+		})
+		.catch(error => console.error('Error fetching data:', error));
+
+		//end of getting user input
 			let responseCounter = 0;
 
 			document.getElementById("user-input").addEventListener("keypress", function(event) {
@@ -392,5 +411,3 @@
 	</script>
 
 </html>
-
-
