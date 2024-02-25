@@ -8,7 +8,7 @@
   <body>
     <form id="signupForm" method="POST" action="/signUp" enctype="multipart/form-data">
         <h1>Sign Up</h1>
-        <h2>Upload an avatar</h2>
+        <!-- <h2>Upload an avatar</h2>
         <h4>Preview Image Before Upload</h4>
         <div class="preview-image">
             <img id="previewImage" alt="Preview" style="max-width: 200px; max-height: 200px;"> 
@@ -31,7 +31,8 @@
                 }
             }
             imageInput.addEventListener('change', previewSelectedImage);
-        </script>
+        </script> -->
+        <br />
         <label>
             First Name <br />
             <input type="text" name="firstName" id="firstName"  maxlength="20" required/>
@@ -111,19 +112,27 @@
   </body>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+    :root {
+        --bg-image: url("./background.png");
+        font-family: "Neucha", cursive;
+    }
     body{
         background-color: #91BA8D;
         font-family: "Neucha", cursive;
         display: flex;
         font-size: 18px;
+        background-image: var(--bg-image);
+			background-position: center center;
+			background-repeat: no-repeat;	
+			background-size: cover;
     }
     #signupForm{
         width: 50%;
         margin:auto;
         padding-left: 10%;
         padding-right: 10%;
-        padding-top: 2%;
         padding-bottom: 2%;
+        margin-bottom: 4%;
         box-sizing: border-box;
     }
     h1{

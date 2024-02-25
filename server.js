@@ -134,4 +134,3 @@ function makeObject(req){
     fs.writeFileSync("users.json", jsonusers, "utf-8");
 
 }
-

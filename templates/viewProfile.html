@@ -9,19 +9,26 @@
 
 <body>
     <div class="main">
-    <h1>Welcome <span id="firstName"></span> <span id="lastName"></span> !</h1> <br />
-    <!-- hardcode image -->
-    <!-- <div id="profile"></div> -->
-    <img src="" id="profilePhoto" alt="Profile"/>
+
+    <div class="page-title" style="display: flex; justify-content: left; align-items: center;">
+            <a href="/">
+                    <img src="./home_google_material_ui.png" alt="Home" style="width: 30px; height: auto; margin-right: 30px;" />
+            </a>    
+            <h1 style="padding-left: 20px; padding-right: 20px;">Welcome <span id="firstName"></span> <span id="lastName"></span>!</h1>  
+            <img src="" id="profilePhoto" alt="Profile" style="width: 20%; height: auto;"/>
+    </div>
+
     <h2>User Data</h2> 
     
     <p>Username: <span id="username"></span></p>
+
     <label id="pass-label">
         <p>Password: <span id="password"></span></p>
-        <button>Change Password</button>
     </label>
     
     <p>Study Style: <span id="studyStyle"></span></p>
+    <button class="button">Change Password</button>
+
     </div>
     <script>
         
@@ -70,9 +77,15 @@
 </body>
 <style>
      @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
-    body{
-        background-color: #91BA8D;
+    :root {
+        --bg-image: url("./background.png");
         font-family: "Neucha", cursive;
+    }
+    body{
+        background-image: var(--bg-image);
+        background-position: center center;
+        background-repeat: no-repeat;	
+        background-size: cover;        
         padding-left: 10% ;
     }
     .main{
@@ -81,14 +94,27 @@
     }
     h1{
         margin-left: -8%;
-        font-size: 54px;
     }
     h2{
-        font-size: 48px;
         margin-top: -2%;
     }
     p{
-        font-size: 36px;
+        font-size: 26px;
+    }
+    .button {
+        background-color: #FDBFA2;
+        padding: 1rem;
+        border: solid 1px black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 25px;
+        font-family: "Neucha", cursive;
+    }
+    .button:hover {
+    	background-color: #FAE7E3;
     }
 
     #pass-label{
