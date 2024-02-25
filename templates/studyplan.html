@@ -9,9 +9,13 @@
     <div class="container">
 
 			<!-- page title -->
-			<div class="page-title">
-				<h1>Generate a Study Plan</h1>
+			<div class="page-title" style="display: flex; justify-content: left; align-items: center;">
+					<a href="/">
+							<img src="./home_google_material_ui.png" alt="Home" style="width: 30px; height: auto; margin-right: 30px;" />
+					</a>    
+					<h1>Generate a Study Plan</h1>
 			</div>
+
 
 			<!-- chatbox header -->
       <div class="chatbox-header">
@@ -34,7 +38,7 @@
                 <div id="received-msg" class="received-msg">
                   <div class="received-msg-inbox">
                     <p>
-                      Hi <span id="firstName"></span>!! My name is Lilypad, your <b>personal study buddy</b>. I'm here to help you succeed
+                      Hi <span id="firstName"></span>! My name is Lilypad, your <b>personal study buddy</b>. I'm here to help you succeed
 											by generating a personalized study plan tailored to your preferred study style.
                     </p>
 										<p>
@@ -43,14 +47,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- <div id="outgoing-chats" class="outgoing-chats">
-                <div id="outgoing-msg" class="outgoing-msg">
-                  <div class="outgoing-chats-msg">
-                  </div>
-                </div>
-              </div> -->
-
             </div>
           </div>
 
@@ -140,13 +136,12 @@
 			border-top-right-radius: 20px;
 			border-bottom-right-radius: 20px;
 			border-bottom-left-radius: 20px;
-			overflow-x:auto;
+			overflow: auto;
+			overflow-x: auto;
 		}
 
 		.chats {
 			padding: 30px 15px 0 25px;
-			overflow: scroll;
-			overflow-x: auto;
 		}
 
 		.generate-button {
